@@ -1,0 +1,4 @@
+*.o
+*.d
+Makefile
+Makefile2
