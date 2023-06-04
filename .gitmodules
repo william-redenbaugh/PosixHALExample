@@ -1,0 +1,3 @@
+[submodule "src/LinuxCSAL"]
+	path = src/LinuxCSAL
+	url = git@github.com:william-redenbaugh/LinuxCSAL.git
