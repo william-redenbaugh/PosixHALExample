@@ -1,7 +1,6 @@
 #include <iostream>
-#include "LinuxCSAL/os_mutx.h"
-
-os_mut_t mut; 
+#include "global_includes.h"
+os_mut_t mut;
 
 int main()
 {
