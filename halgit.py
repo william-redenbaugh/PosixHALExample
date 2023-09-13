@@ -29,7 +29,7 @@ def command_repos(repos, sub_command):
             print("Repo: ", key)
             command = None
             if(value["dir"] != ""):
-                command = "cd " + value["dir"] + "&&" + sub_command
+                command = "cd " + value["dir"] + " && " + sub_command
             else:
                 command =  sub_command
             output = run_command(command)
@@ -41,23 +41,28 @@ def command_repos(repos, sub_command):
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Pull or clear JSON data")
-    parser.add_argument("action", choices=["pull", "clear", "add"], help="Action to perform (pull or clear)")
+    parser.add_argument("action", choices=["pull", "clear", "add", "commit"], help="Action to perform (pull or clear)")
+    parser.add_argument('-m', '--message', type=str, required=False, help='The message to display.')
 
     # Parse the command-line arguments
     args = parser.parse_args()
 
-    return args.action
+    return args
 
 def main():
-    action = parse_args()
+    args = parse_args()
     repos = open_repos()
 
+    action = args.action
+    message = args.message
     if(action == "pull"):
         command_repos(repos, "git pull")
     elif(action == "clear"):
         command_repos(repos, "git checkout .")
     elif(action == "add"):
         command_repos(repos, "git add .")
+    elif(action == "commit"):
+        command_repos(repos, "git commit -m \"" + message + "\"")
     else:
         print("invalid input")
 
