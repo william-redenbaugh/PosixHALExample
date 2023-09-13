@@ -22,26 +22,22 @@ def open_repos():
 
     return data
 
-def clear_repos(repos):
+def command_repos(repos, sub_command):
     try:
         # Print the deserialized data
         for key, value in repos.items():
             print("Repo: ", key)
             command = None
             if(value["dir"] != ""):
-                command = "cd " + value["dir"] + " && git checkout ."
+                command = "cd " + value["dir"] + "&&" + sub_command
             else:
-                command = "git checkout ."
+                command =  sub_command
             output = run_command(command)
             print(output)
     
     except Exception as e:
         print("Invalid repos.json parameters")
         print(e)
-
-
-def pull_repos(repos):
-    pass
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Pull or clear JSON data")
@@ -57,9 +53,11 @@ def main():
     repos = open_repos()
 
     if(action == "pull"):
-        pull_repos(repos)
+        command_repos(repos, "git pull")
     elif(action == "clear"):
-        clear_repos(repos)
+        command_repos(repos, "git checkout .")
+    elif(action == "add"):
+        command_repos(repos, "git add .")
     else:
         print("invalid input")
 
