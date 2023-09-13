@@ -39,9 +39,26 @@ def command_repos(repos, sub_command):
         print("Invalid repos.json parameters")
         print(e)
 
+def push_repos(repos):
+    try:
+        # Print the deserialized data
+        for key, value in repos.items():
+            print("Repo: ", key)
+            command = None
+            if(value["dir"] != ""):
+                command = "cd " + value["dir"] + " && " + "git push origin " + value["branch"]
+            else:
+                command =  "git push origin " + value["branch"]
+            output = run_command(command)
+            print(output)
+    
+    except Exception as e:
+        print("Invalid repos.json parameters")
+        print(e)
+
 def parse_args():
     parser = argparse.ArgumentParser(description="Pull or clear JSON data")
-    parser.add_argument("action", choices=["pull", "clear", "add", "commit"], help="Action to perform (pull or clear)")
+    parser.add_argument("action", choices=["pull", "clear", "add", "commit", "push"], help="Action to perform (pull or clear)")
     parser.add_argument('-m', '--message', type=str, required=False, help='The message to display.')
 
     # Parse the command-line arguments
@@ -63,6 +80,8 @@ def main():
         command_repos(repos, "git add .")
     elif(action == "commit"):
         command_repos(repos, "git commit -m \"" + message + "\"")
+    elif(action == "push"):
+        push_repos(repos)
     else:
         print("invalid input")
 
