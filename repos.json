@@ -1,0 +1,27 @@
+{
+    "CHAL_SHARED": {
+        "dir": "src/CHAL_SHARED",
+        "link": "",
+        "branch": "main"
+    },
+    "CSAL_SHARED": {
+        "dir": "src/CSAL_SHARED",
+        "link": "",
+        "branch": "main"
+    },
+    "LinuxCSAL": {
+        "dir": "src/CHAL_SHARED",
+        "link": "",
+        "branch": "main"
+    },
+    "LinuxCHAL": {
+        "dir": "src/CHAL_SHARED",
+        "link": "",
+        "branch": "main"
+    },
+    "PosixHALExample": {
+        "dir": "",
+        "link": "",
+        "branch": "main"
+    }
+}
