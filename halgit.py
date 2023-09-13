@@ -58,7 +58,7 @@ def push_repos(repos):
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Pull or clear JSON data")
-    parser.add_argument("action", choices=["pull", "clear", "add", "commit", "push"], help="Action to perform (pull or clear)")
+    parser.add_argument("action", choices=["pull", "clear", "add", "commit", "push", "status"], help="Action to perform (pull or clear)")
     parser.add_argument('-m', '--message', type=str, required=False, help='The message to display.')
 
     # Parse the command-line arguments
@@ -82,6 +82,8 @@ def main():
         command_repos(repos, "git commit -m \"" + message + "\"")
     elif(action == "push"):
         push_repos(repos)
+    elif(action == "status"):
+        command_repos(repos, "git status")
     else:
         print("invalid input")
 
